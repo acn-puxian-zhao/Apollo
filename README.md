@@ -1,3 +1,1 @@
-# Apollo
-This is a donet core api service
-Database is mysql
+前后台还是没有通
