@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Apollo.Controllers
 {
+    [Route("api/[controller]/[action]")]
     public class TodoController : ApolloController
     {
         private readonly ITodoService _todoService;

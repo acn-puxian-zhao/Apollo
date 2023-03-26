@@ -13,24 +13,19 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    /**
-     * @param  {object} session      Session object
-     * @param  {object} token        User object    (if using database sessions)
-     *                               JSON Web Token (if not using database sessions)
-     * @return {object}              Session that will be returned to the client
-     */
-    async session(session, token) {
-      // Add property to session, like an access_token from a provider.
-      session.accessToken = token.accessToken;
-      return session;
-    },
-
-    async jwt(token, user, account, profile, isNewUser) {
-      // Add access_token to the token right after signin
-      if (account?.accessToken) {
-        token.accessToken = account.accessToken;
+    async jwt({ token, account }) {
+      console.log('jwt executed')
+      // Persist the OAuth access_token to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token
       }
-      return token;
+      return token
     },
+    async session({ session, token, user }) {
+      console.log('session executed')
+      // Send properties to the client, like an access_token from a provider.
+      session.accessToken = token.accessToken
+      return session
+    }
   },
 });

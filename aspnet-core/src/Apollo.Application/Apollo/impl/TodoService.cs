@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp;
 using Volo.Abp.Domain.Repositories;
 
 namespace Apollo.Apollo.impl
 {
+    [RemoteService(false)]
     public class TodoService : ApolloAppService, ITodoService
     {
         private readonly IRepository<Entities.Todo, long> _todoRepository;
