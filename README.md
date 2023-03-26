@@ -1,8 +1,8 @@
 #Error Page content:  
 "
-error:invalid_request
-error_description:The specified 'redirect_uri' is not valid for this client application.
-error_uri:https://documentation.openiddict.com/errors/ID2043
+error:invalid_request  
+error_description:The specified 'redirect_uri' is not valid for this client application.  
+error_uri:https://documentation.openiddict.com/errors/ID2043  
 "
 
 #URL:  
