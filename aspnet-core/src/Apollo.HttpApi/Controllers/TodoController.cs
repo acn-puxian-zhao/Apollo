@@ -1,5 +1,6 @@
 ﻿using Apollo.Apollo;
 using Apollo.Apollo.Todo.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Apollo.Controllers
 {
+    [Authorize]
     [Route("api/[controller]/[action]")]
     public class TodoController : ApolloController
     {
@@ -22,7 +24,7 @@ namespace Apollo.Controllers
         }
 
         [HttpPost]
-        public async Task<TodoDto> CreateAsync(TodoDto input)
+        public async Task<TodoDto> CreateAsync([FromBody]TodoDto input)
         {
             return await _todoService.CreateAsync(input);
         }
@@ -40,7 +42,7 @@ namespace Apollo.Controllers
         }
 
         [HttpPut]
-        public async Task UpdateAsync(TodoDto input)
+        public async Task UpdateAsync([FromBody]TodoDto input)
         {
             await _todoService.UpdateAsync(input);
         }
@@ -48,7 +50,7 @@ namespace Apollo.Controllers
         [HttpGet]
         public async Task<TodoDto> GetAsync(long id)
         {
-            return await(_todoService.GetAsync(id));
+            return await (_todoService.GetAsync(id));
         }
     }
 }

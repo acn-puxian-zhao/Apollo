@@ -116,10 +116,19 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 type: OpenIddictConstants.ClientTypes.Confidential,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Web Application",
-                grantTypes: new List<string> { "client_credentials", "authorization_code" },
+                grantTypes: new List<string> //Hybrid flow
+                {
+                    OpenIddictConstants.GrantTypes.ClientCredentials,
+                    OpenIddictConstants.GrantTypes.AuthorizationCode,
+                    OpenIddictConstants.GrantTypes.Password,
+                    OpenIddictConstants.GrantTypes.Implicit,
+                    OpenIddictConstants.GrantTypes.RefreshToken,
+                },
                 secret: configurationSection["Apollo_Spa_1:ClientSecret"] ?? "1q2w3e*",
                 //requireClientSecret: false,
-                redirectUri: $"{webClientRootUrl}/authentication/login-callback/identity-server4",
+                //redirectUri: $"{webClientRootUrl}/authentication/login-callback/identity-server4",
+                redirectUri: $"{webClientRootUrl}/api/auth/callback/identity-server4",
+                clientUri: webClientRootUrl,
                 postLogoutRedirectUri: $"{webClientRootUrl}"
                 //corsOrigins: new[] { webClientRootUrl.RemovePostFix("/")}
             );
@@ -213,6 +222,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 grantTypes: new List<string>
                 {
                     OpenIddictConstants.GrantTypes.AuthorizationCode,
+                    OpenIddictConstants.GrantTypes.ClientCredentials,
                 },
                 scopes: commonScopes,
                 redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
